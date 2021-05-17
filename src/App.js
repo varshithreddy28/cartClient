@@ -29,6 +29,7 @@ function App() {
   useEffect(() => {
     const fetchdata = async ()=>{
       const token=localStorage.get('token')
+      console.log(token)
         if(token){
         try {
           const response = await axios.get(
