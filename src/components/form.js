@@ -8,14 +8,13 @@ const FormInputs = ({handleSubmit,handleChange ,name}) => {
 
   return (
     <div>
-            <Button color="secondary" className="add" size="lg" block onClick={toggle} >Add Item</Button>
-      
+      <Button color="secondary" className="add" size="lg" block onClick={toggle} >Add Item</Button>
       <Modal isOpen={modal} toggle={toggle}>
         <ModalHeader toggle={toggle}>Add Product</ModalHeader>
         <Form onSubmit={handleSubmit}>
         <ModalBody>
             <FormGroup>
-                <Input type="text" required name='name' placeholder="Item Name" onChange={handleChange} value={name.name}/>
+                <Input type="text" required name='name' required placeholder="Item Name" onChange={handleChange} value={name.name}/>
             </FormGroup>
         </ModalBody>
         <ModalFooter>

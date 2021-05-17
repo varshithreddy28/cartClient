@@ -5,16 +5,23 @@ import {CSSTransition,TransitionGroup} from 'react-transition-group'
 // Fake ID's
 // import { v4 as uuid } from 'uuid';
 import axios from 'axios'
+import Login from './login'
+
 
 import FormInputs from './form'
 
 const ShoppingList = ()=>{
-    const url = 'https://cart-api-v1.herokuapp.com/item/api/new'
-    const url_GET = 'https://cart-api-v1.herokuapp.com/item/api/'
+    const url = 'http://localhost:3000/item/api/new/'
+    const url_GET = 'http://localhost:3000/item/api/'
+    const login = "http://localhost:3000/item/api/user/login"
+    const login_user = "http://localhost:3000/item/api/user/"
 
     const [name, setName] = useState({name:''})
     const [items, setItems] = useState([])
+    const [details, setDetails] = useState({userName:'',password:''})
     const [loading, setLoading] = useState(true)
+    const [logedIn, setLogedIn] = useState(false)
+
     useEffect(() => {
         axios({
         method: 'get',
@@ -27,7 +34,12 @@ const ShoppingList = ()=>{
     },[])
     const handleSubmit = (e)=>{
        e.preventDefault()
-       axios.post(url,name)
+       axios.post(url,name,{
+           headers:
+            {
+               "authorization":localStorage.getItem('token')
+            }
+       })
        .then((res)=>{
            setItems([res.data,...items])
            setName({name:''})
@@ -40,7 +52,11 @@ const ShoppingList = ()=>{
         setName({...name,[inputName]:inputValue})
     }
     const deleteHandler = (id)=>{
-        axios.delete(`https://cart-api-v1.herokuapp.com/item/api/delete/${id}`)
+        axios.delete(`http://localhost:3000/item/api/delete/${id}`,{
+            headers:{
+                "authorization":localStorage.getItem('token')
+            }
+        })
         .then(res=>{
             setItems(items.filter((item)=>{
                 return item._id!==id
@@ -48,8 +64,37 @@ const ShoppingList = ()=>{
         })
         
     }
+
+
+    const loginSubmit = async (e)=>{
+        e.preventDefault()
+        try {
+            const response = await axios.post(login,details)
+            if(response.data.success){
+                axios.post(login_user,
+                    // storing JWT in local storage
+                    localStorage.setItem('token',`Bearer ${response.data.token}`)  
+                )
+                setLogedIn(true)
+            }
+            else{
+                setLogedIn(false)
+            }
+        } catch (error) {
+            setLogedIn(false)
+        }
+        setDetails({userName:'',password:''})
+    }
+    const handleChangeLogin = (e)=>{
+        const inputName = e.target.name
+        const inputValue = e.target.value
+        // IMPORTANT STEP FOR TAKING INPUTS
+         setDetails({...details,[inputName]:inputValue})
+    }
+
     return(
         <Container>
+            <Login loginSubmit={loginSubmit} handleChange={handleChangeLogin} details={details}></Login>
             <div className="display">                
                     <FormInputs handleSubmit={handleSubmit} handleChange={handleChange} name={name}></FormInputs>
                 {/* ~<FormInput handleSubmit={handleSubmit} handleChange={handleChange} name={name}></FormInput> */}

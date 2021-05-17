@@ -1,4 +1,6 @@
+import axios from 'axios';
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import {
   Container,  
   Collapse,
@@ -8,30 +10,64 @@ import {
   Nav,
   NavItem,
   NavLink,
+  NavbarText
 } from 'reactstrap';
 
-const NavBar = (props) => {
+const NavBar = ({setLogedIn,loggedIn}) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const toggle = () => setIsOpen(!isOpen);
 
+  const logout = ()=>{
+    axios.get("http://localhost:3000/item/api/user/logout")
+    localStorage.clear()
+    setLogedIn(false)
+  }
+  
+
   return (
-//    Dont use div for stickytop
-     
-      <Navbar color="dark" dark light expand="md" sticky="top">
-          <Container>
-            <NavbarBrand href="/">ShoppingCart</NavbarBrand>
-            <NavbarToggler onClick={toggle} />
-            <Collapse isOpen={isOpen} navbar>
-            <Nav className="mr-auto" navbar>
-                <NavItem>
-                <NavLink href="https://github.com/varshithreddy28/">GitHub </NavLink>
-                </NavItem>
-            </Nav>
-            </Collapse>
-          </Container>
-        
+
+
+    <Navbar color="dark" dark light expand="md" sticky="top">
+      <Container>
+        <NavbarBrand href="/"><Link to={`/`}>ShoppingCart</Link></NavbarBrand>
+        <NavbarToggler onClick={toggle} />
+        <Collapse isOpen={isOpen} navbar>
+          <Nav className="mr-auto" navbar>
+            <NavItem>
+              <NavLink href="https://github.com/varshithreddy28/">GitHub</NavLink>
+            </NavItem>
+          </Nav>
+          <NavItem className="ml-auto">
+            
+          </NavItem>
+          <span class="navbar-text">
+            {!loggedIn?<Link to={`/user/login`}>Login</Link>:<NavLink onClick={logout} className="logout">Logout</NavLink>}
+          </span>
+        </Collapse>
+      </Container>
       </Navbar>
+
+
+//    Dont use div for stickytop
+      // <Navbar color="dark" dark light expand="md" sticky="top" >
+      //     <Container>
+      //       <NavbarBrand><Link to={`/`}>ShoppingCart</Link></NavbarBrand>
+      //       <NavbarToggler onClick={toggle} />
+      //       <Collapse isOpen={isOpen} navbar>
+      //       <Nav className="mr-auto" navbar>
+      //           <NavItem>
+      //           <NavLink href="https://github.com/varshithreddy28/" className="github" >GitHub </NavLink>
+      //           </NavItem>
+                
+      //           <NavItem className="float-right">
+      //             {!loggedIn?<Link to={`/user/login`}>Login</Link>:<NavLink onClick={logout}>Logout</NavLink>}
+      //           </NavItem>
+      //       </Nav>
+      //       </Collapse>
+      //     </Container>
+        
+      // </Navbar>
     
   );
 }

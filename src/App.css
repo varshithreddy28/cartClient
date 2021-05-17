@@ -1,3 +1,16 @@
+body {
+  background: #bdc3c7; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to left,
+    #2c3e50,
+    #bdc3c7
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to left,
+    #2c3e50,
+    #bdc3c7
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
 .remove {
   margin-right: 0.5em;
   float: right;
@@ -38,6 +51,53 @@
   margin-top: 1rem;
 }
 
+.authenticate {
+  background-color: rgb(255, 255, 255);
+  padding: 3em;
+  margin-top: 15vh;
+  border: 3px solid #ffeee6;
+  border-radius: 9px;
+}
+.authenticate h2 {
+  text-align: center;
+}
+.authenticate button {
+  float: right;
+  margin-top: 0.5rem;
+}
+.items {
+  padding: 1em;
+  border-radius: 2px;
+}
+a {
+  color: #ffeee6;
+  text-decoration: none;
+}
+a :hover {
+  color: #ffeee6;
+  text-decoration: none;
+}
+.github {
+  padding-top: 1em;
+}
+.ml-auto {
+  margin-right: auto;
+}
+.fluid {
+  text-align: center;
+  border-radius: 30px;
+  margin-top: 30vh;
+  background-color: aliceblue;
+}
+.display-3 {
+  font-size: 6rem;
+}
+.lead {
+  font-size: 3rem;
+}
+.logout:hover {
+  cursor: pointer;
+}
 /* Loading Animation :  */
 .loader {
   animation: spin 1s infinite linear;
