@@ -98,6 +98,9 @@ a :hover {
 .logout:hover {
   cursor: pointer;
 }
+.login {
+  margin-right: 10px;
+}
 /* Loading Animation :  */
 .loader {
   animation: spin 1s infinite linear;

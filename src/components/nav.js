@@ -42,7 +42,8 @@ const NavBar = ({setLogedIn,loggedIn}) => {
             
           </NavItem>
           <span class="navbar-text">
-            {!loggedIn?<Link to={`/user/login`}>Login</Link>:<NavLink onClick={logout} className="logout">Logout</NavLink>}
+            {!loggedIn?<Link to={`/user/login`} className="login">Login  </Link>:<NavLink onClick={logout} className="logout">Logout</NavLink>}
+            {!loggedIn?<Link to={`/user/register`}>Register</Link>:''}
           </span>
         </Collapse>
       </Container>

@@ -66,7 +66,7 @@ const ShoppingList = ({setLogedIn,loggedIn,message,setMessage,data,setData})=>{
         setName({...name,[inputName]:inputValue})
     }
     const deleteHandler = (id)=>{
-        axios.delete(`http://localhost:3000/item/api/delete/${id}`,{
+        axios.delete(`https://cart-api-v1.herokuapp.com/item/api/delete/${id}`,{
             headers:{
                 "authorization":localStorage.getItem('token')
             }
