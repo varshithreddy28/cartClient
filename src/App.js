@@ -41,7 +41,7 @@ function App() {
           })
         setLogedIn(true)
         } catch (error) {
-          console.log(error.message)
+          console.log(error)
         }
       }
     }
