@@ -19,7 +19,7 @@ const NavBar = ({setLogedIn,loggedIn}) => {
   const toggle = () => setIsOpen(!isOpen);
 
   const logout = ()=>{
-    axios.get("http://localhost:3000/item/api/user/logout")
+    axios.get("https://cart-api-v1.herokuapp.com/item/api/user/logout")
     localStorage.clear()
     setLogedIn(false)
   }

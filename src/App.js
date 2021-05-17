@@ -58,7 +58,7 @@ function App() {
       <Navbar setLogedIn={setLogedIn} loggedIn={loggedIn}/>
       <Switch>
         <Route exact path='/'>
-          <Items setLogedIn={setLogedIn} loggedIn={loggedIn}></Items>
+          <Items setLogedIn={setLogedIn} loggedIn={loggedIn} message={message} setMessage={setMessage} data={data} setData={setData}></Items>
         </Route>
         <Route exact path='/user/login'>
           <Login details={details} handleChange={handleChange} setDetails={setDetails} 

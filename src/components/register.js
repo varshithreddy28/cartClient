@@ -6,7 +6,7 @@ import { useHistory } from 'react-router-dom';
 
 const Register = ({details ,handleChange,setDetails,setLogedIn,loggedIn,message,setMessage,data,setData }) => {
     const history = useHistory()
-    const register = "http://localhost:3000/item/api/user/register/"
+    const register = "https://cart-api-v1.herokuapp.com/item/api/user/register/"
     useEffect(() => {
     setTimeout(() => {
       setMessage(false)

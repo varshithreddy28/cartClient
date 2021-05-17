@@ -1,5 +1,5 @@
 import React,{useState,useEffect} from 'react'
-import {Container,ListGroup,ListGroupItem,Button,Jumbotron } from 'reactstrap'
+import {Container,ListGroup,ListGroupItem,Button,Jumbotron,Alert } from 'reactstrap'
 // Transion - fadeinfadeout
 import {CSSTransition,TransitionGroup} from 'react-transition-group' 
 // Fake ID's
@@ -9,13 +9,20 @@ import axios from 'axios'
 
 import FormInputs from './form'
 
-const ShoppingList = ({setLogedIn,loggedIn})=>{
-    const url = 'http://localhost:3000/item/api/new/'
-    const url_GET = 'http://localhost:3000/item/api/'
+const ShoppingList = ({setLogedIn,loggedIn,message,setMessage,data,setData})=>{
+    const url = 'https://cart-api-v1.herokuapp.com/item/api/new/'
+    const url_GET = 'https://cart-api-v1.herokuapp.com/item/api/'
 
     const [name, setName] = useState({name:''})
     const [items, setItems] = useState([])
     const [loading, setLoading] = useState(true)
+
+    useEffect(() => {
+    setTimeout(() => {
+      setMessage(false)
+      setData('')
+    }, 4000);
+  }, [message])
 
     useEffect(() => {
         axios({
@@ -26,12 +33,13 @@ const ShoppingList = ({setLogedIn,loggedIn})=>{
             }
         })
         .then((res)=>{
-            console.log(res)
+
             setLoading(false)
             setItems(res.data)
         })
         .catch((error)=>{
-            console.log(error.message)
+            setMessage(true)
+            setData(error.message)
         })
     },[])
     const handleSubmit = (e)=>{
@@ -45,6 +53,10 @@ const ShoppingList = ({setLogedIn,loggedIn})=>{
        .then((res)=>{
            setItems([res.data,...items])
            setName({name:''})
+       })
+       .catch((error)=>{
+           setMessage(true)
+          setData(error.message)
        })
     }
     const handleChange = (e)=>{
@@ -70,6 +82,7 @@ const ShoppingList = ({setLogedIn,loggedIn})=>{
             <Container>
             <div className="display col-8 offset-2">                
                 <FormInputs handleSubmit={handleSubmit} handleChange={handleChange} name={name}></FormInputs>
+                {message?<Alert color="warning">{data}</Alert>:null}
                 {loading? <div class="loader"></div> :''}
                     <ListGroup>
                     <TransitionGroup className="shopping-list">
