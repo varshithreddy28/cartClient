@@ -25,11 +25,10 @@ function App() {
   const [message, setMessage] = useState(false)
   const [data, setData] = useState('')
 
-  const login_user = "http://localhost:3000/item/api/user/"
+  const login_user = "https://cart-api-v1.herokuapp.com/item/api/user/"
   useEffect(() => {
     const fetchdata = async ()=>{
       const token=localStorage.get('token')
-      console.log(token)
         if(token){
         try {
           const response = await axios.get(
