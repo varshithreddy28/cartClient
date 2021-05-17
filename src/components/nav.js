@@ -48,27 +48,6 @@ const NavBar = ({setLogedIn,loggedIn}) => {
         </Collapse>
       </Container>
       </Navbar>
-
-
-//    Dont use div for stickytop
-      // <Navbar color="dark" dark light expand="md" sticky="top" >
-      //     <Container>
-      //       <NavbarBrand><Link to={`/`}>ShoppingCart</Link></NavbarBrand>
-      //       <NavbarToggler onClick={toggle} />
-      //       <Collapse isOpen={isOpen} navbar>
-      //       <Nav className="mr-auto" navbar>
-      //           <NavItem>
-      //           <NavLink href="https://github.com/varshithreddy28/" className="github" >GitHub </NavLink>
-      //           </NavItem>
-                
-      //           <NavItem className="float-right">
-      //             {!loggedIn?<Link to={`/user/login`}>Login</Link>:<NavLink onClick={logout}>Logout</NavLink>}
-      //           </NavItem>
-      //       </Nav>
-      //       </Collapse>
-      //     </Container>
-        
-      // </Navbar>
     
   );
 }

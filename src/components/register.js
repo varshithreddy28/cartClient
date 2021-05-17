@@ -1,6 +1,8 @@
 import React,{useEffect} from 'react';
 import axios from 'axios'
 import { Button, Form, FormGroup, Label, Input,Alert } from 'reactstrap';
+import localStorage from 'local-storage'
+
 import { useHistory } from 'react-router-dom';
 
 
@@ -20,7 +22,7 @@ const Register = ({details ,handleChange,setDetails,setLogedIn,loggedIn,message,
             if(response.data.success){
                 axios.post(register,
                     // storing JWT in local storage
-                    localStorage.setItem('token',`Bearer ${response.data.token}`)  
+                    localStorage.set('token',`Bearer ${response.data.token}`)  
                 )
                 setLogedIn(true)
                 history.push('/') // Sttting path after login

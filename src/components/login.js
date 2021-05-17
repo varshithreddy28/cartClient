@@ -1,6 +1,7 @@
 import React,{useEffect} from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios'
+import localStorage from 'local-storage'
 import { useHistory } from 'react-router-dom';
 
 
@@ -27,7 +28,7 @@ const Login = ({details ,handleChange,setDetails,setLogedIn,message,setMessage,d
             setDetails({name:'',password:''})
             const response = await axios.post(login,{username:details.name,password:details.password})
             if(response.data.success){
-              localStorage.setItem('token',`Bearer ${response.data.token}`)
+              localStorage.set('token',`Bearer ${response.data.token}`)
               history.push('/') // Sttting path after login
               setLogedIn(true)
             }

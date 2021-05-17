@@ -2,6 +2,7 @@ import React,{useState,useEffect} from 'react'
 import {Container,ListGroup,ListGroupItem,Button,Jumbotron,Alert } from 'reactstrap'
 // Transion - fadeinfadeout
 import {CSSTransition,TransitionGroup} from 'react-transition-group' 
+import localStorage from 'local-storage'
 // Fake ID's
 // import { v4 as uuid } from 'uuid';
 import axios from 'axios'
@@ -29,7 +30,7 @@ const ShoppingList = ({setLogedIn,loggedIn,message,setMessage,data,setData})=>{
         method: 'get',
         url: url_GET,headers:
             {
-               "authorization":localStorage.getItem('token')
+               "authorization":localStorage.get('token')
             }
         })
         .then((res)=>{
@@ -47,7 +48,7 @@ const ShoppingList = ({setLogedIn,loggedIn,message,setMessage,data,setData})=>{
        axios.post(url,name,{
            headers:
             {
-               "authorization":localStorage.getItem('token')
+               "authorization":localStorage.get('token')
             }
        })
        .then((res)=>{
@@ -68,7 +69,7 @@ const ShoppingList = ({setLogedIn,loggedIn,message,setMessage,data,setData})=>{
     const deleteHandler = (id)=>{
         axios.delete(`https://cart-api-v1.herokuapp.com/item/api/delete/${id}`,{
             headers:{
-                "authorization":localStorage.getItem('token')
+                "authorization":localStorage.get('token')
             }
         })
         .then(res=>{

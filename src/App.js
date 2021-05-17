@@ -1,6 +1,7 @@
 import React,{useState,useEffect} from 'react'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { useHistory } from 'react-router-dom';
+import localStorage from 'local-storage'
 
 import 'bootstrap/dist/css/bootstrap.min.css'
 
@@ -27,7 +28,7 @@ function App() {
   const login_user = "http://localhost:3000/item/api/user/"
   useEffect(() => {
     const fetchdata = async ()=>{
-      const token=localStorage.getItem('token')
+      const token=localStorage.get('token')
         if(token){
         try {
           const response = await axios.get(
