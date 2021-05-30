@@ -40,7 +40,8 @@ function App() {
           })
         setLogedIn(true)
         } catch (error) {
-          console.log(error)
+        setLogedIn(false)
+          console.log(error+"New error msg")
         }
       }
     }
